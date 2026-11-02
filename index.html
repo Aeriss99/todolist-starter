@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Todolist</title>
+</head>
+<body>
+  <h1>Aplikasi Todolist</h1>
+  <form id="form-todo">
+    <label for="isi">Tugas baru</label>
+    <input id="isi" required>
+    <button type="submit">Tambah</button>
+  </form>
+  <ul id="daftar"></ul>
+  <script src="todo.js"></script>
+  <script>
+    const form = document.getElementById('form-todo');
+    const isi = document.getElementById('isi');
+    const daftar = document.getElementById('daftar');
+    function tampilkan() {
+      daftar.innerHTML = '';
+      todos.forEach((t, i) => {
+        const li = document.createElement('li');
+        li.textContent = t + ' ';
+        const hapus = document.createElement('button');
+        hapus.textContent = 'Hapus';
+        hapus.onclick = () => { hapusTodo(i); tampilkan(); };
+        li.appendChild(hapus);
+        daftar.appendChild(li);
+      });
+    }
+    form.addEventListener('submit', (e) => { e.preventDefault(); tambahTodo(isi.value); isi.value = ''; tampilkan(); });
+  </script>
+</body>
+</html>
